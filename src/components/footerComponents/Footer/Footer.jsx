@@ -1,5 +1,5 @@
 import React from 'react'
-import { MenuList } from '../MenuList'
+import { MenuList } from '../../MenuList' 
 import { FooterPay } from '../FooterPay/FooterPay'
 import { FooterContacts } from '../FooterContacts/FooterContacts'
 

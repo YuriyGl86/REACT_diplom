@@ -9,11 +9,23 @@ a {
   color: #727e86;
 }
 
+body  a {
+  color: #727e86;
+}
+
 a, a:hover, a:visited, a:active {
   text-decoration: none;
 }
 
+body a, body a:hover, body a:visited, body a:active {
+  text-decoration: none;
+}
+
 a:hover {
+  cursor: pointer;
+}
+
+body a:hover {
   cursor: pointer;
 }
 

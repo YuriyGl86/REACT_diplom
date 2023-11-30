@@ -1,26 +1,28 @@
-import { Input} from 'antd';
-import { useDispatch, useSelector } from "react-redux";
-import { fetchFilmsListByQuery } from '../../store/thunks';
-// import { FilmList } from '../../components/FilmList';
+import { Banner } from "../../components/Banner";
+import { Preloader } from "../../components/Preloader";
+import { Widget } from "../../components/Widget/Widget";
 
-const { Search } = Input;
+
 
 export  function HomePage() {
-    // const dispatch = useDispatch();
-    // const { loading,filmsList } = useSelector((state) => state.films);
 
-    // const handleSearch =(value)=>{
-    //     dispatch(fetchFilmsListByQuery(value))
-    // }
 
 
   return (
-    <div className='search-container'>
-        
-        
+    <div className="row">
+      <div className="col">
+        <Banner/>
 
-        
+        <Widget title={'Хиты продаж!'} sectionClasses={"top-sales"}>
+          <Preloader/>
+        </Widget>
 
+
+        <Widget title={'Каталог'} sectionClasses={"catalog"}>
+          <Preloader/>
+        </Widget>
+
+      </div>
     </div>
   )
 }

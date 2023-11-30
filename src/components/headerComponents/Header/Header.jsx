@@ -1,9 +1,10 @@
 
-import { MenuList } from '../MenuList'
-import { HeaderCart } from '../HeaderCart/HeaderCart'
-import { SearchExpander } from '../SearchExpander/SearchExpander'
+import { MenuList } from '../../MenuList'
+import { HeaderCart } from '../HeaderCart'
+import { SearchExpander } from '../SearchExpander'
 import { SearchForm } from '../SearchForm/SearchForm'
-import { Logo } from '../Logo/Logo'
+import { Logo } from '../Logo'
+import { MenuItem } from '../../MenuItem'
 
 export  function Header({ menuItems }) {
   return (
@@ -13,7 +14,7 @@ export  function Header({ menuItems }) {
           <nav className="navbar navbar-expand-sm navbar-light bg-light">
             <Logo/>
             <div className="collapse navbar-collapse" id="navbarMain">
-                <MenuList menuItems={menuItems} classNames={"navbar-nav mr-auto"}/>        
+                <MenuList menuItems={menuItems} classNames={"navbar-nav mr-auto"}/>
                 <div>
                     <div className="header-controls-pics">                      
                         <SearchExpander/>
@@ -28,3 +29,4 @@ export  function Header({ menuItems }) {
     </header>
   )
 }
+

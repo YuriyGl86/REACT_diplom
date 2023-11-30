@@ -1,23 +1,23 @@
 import { Outlet } from "react-router-dom"
-import { Header } from "../Header/Header";
-import { Footer } from "../Footer/Footer";
+import { Header } from "../headerComponents/Header/Header";
+import { Footer } from "../footerComponents/Footer";
 
 export  function Layout() {
-  const menuItems = {
+  const menuItems = { // Пункты меню тут нужно хранить или выносить в store?
     main:{
       href: '/',
       title:'Главная'
     },
     catalog:{
-      href: '/catalog.html',
+      href: '/catalog',
       title:'Каталог'
     },
     about:{
-      href: '/about.html',
+      href: '/about',
       title:'О магазине'
     },
     contacts:{
-      href: '/contacts.html',
+      href: '/contacts',
       title:'Контакты'
     }
   }

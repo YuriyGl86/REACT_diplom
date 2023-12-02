@@ -21,7 +21,7 @@ export const catalogFetchAPI = createApi({
                     }
                 }
             },        
-            keepUnusedDataFor: 1,
+            keepUnusedDataFor: 0,
             serializeQueryArgs: ({ queryArgs, endpointDefinition, endpointName })=>{ // Для себя: исключаем из ключа кэширования offset 
                 const {selected, q} = queryArgs
                 return defaultSerializeQueryArgs({

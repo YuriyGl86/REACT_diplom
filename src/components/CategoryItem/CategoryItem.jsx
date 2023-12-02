@@ -14,7 +14,7 @@ export  function CategoryItem({category}) {
   return (
     <li className="nav-item"  >
         <a 
-        className={`nav-link ${category.id == selected? 'active': ''}`} 
+        className={`nav-link ${category.id === selected? 'active': ''}`} 
         href="#" 
         onClick={handleCategoryClick}
         >

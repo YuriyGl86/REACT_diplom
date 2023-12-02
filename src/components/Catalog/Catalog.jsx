@@ -2,9 +2,10 @@ import { CategoriesList } from '../../components/CategoriesList'
 import { CardsList } from '../../components/CardsList'
 import { AddMoreButton } from '../../components/AddMoreButton'
 import { Widget } from '../../components/Widget'
-import { useGetCatalogItemsQuery } from '../../store/catalogFetchAPI'
+import { catalogFetchAPI, useGetCatalogItemsQuery } from '../../store/catalogFetchAPI'
 import { Preloader } from '../Preloader'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 
 export  function Catalog({ children }) {
@@ -41,9 +42,15 @@ export  function Catalog({ children }) {
     //     },
       
     // ]
-
     const { selected, offset, haveMoreItems,searchRequest } = useSelector((state) => state.appState);
     const { data, error, isLoading, isSuccess } = useGetCatalogItemsQuery({selected, q:searchRequest, offset})
+
+    const dispatch = useDispatch()
+
+  useEffect(()=>{
+
+    return ()=> {dispatch(catalogFetchAPI.util.resetApiState())}
+  }, [])
 
       
   return (
@@ -52,7 +59,7 @@ export  function Catalog({ children }) {
         {children}
         <CategoriesList/>
 
-        {error?`Произошла ошибка загрузки категорий каталога - ${error}`:null}
+        {error?`Произошла ошибка загрузки категорий каталога - ${error.message}`:null}
       {isLoading?<Preloader/>:null}
       {isSuccess?
         <CardsList items={data} addClasses={'catalog-item-card'}/>: null}

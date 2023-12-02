@@ -6,6 +6,7 @@ const initialState = {
   offset: null,
   haveMoreItems: true,
   loadingMore: false,
+  headerSearchOpen: false,
   headerSearch: '',
   catalogSearch: '',
   searchRequest:undefined
@@ -41,8 +42,22 @@ export const appStateSlice = createSlice({
         state.searchRequest = null
         state.catalogSearch = ''
         state.headerSearch  = ''
-
+        state.headerSearchOpen = false
       },
+      toggleHeaderSearch(state,action) {
+        state.headerSearchOpen = !state.headerSearchOpen
+      },
+      changeHeaderSearch(state,action) {
+        state.headerSearch = action.payload
+      },
+      goToCatalogSearch(state,action) {
+        state.catalogSearch = state.headerSearch
+        state.searchRequest = state.headerSearch
+        state.headerSearch = ''
+        // state.headerSearchOpen = 'false'
+      },
+
+
     },
     extraReducers: (builder) => {
       builder.addMatcher(

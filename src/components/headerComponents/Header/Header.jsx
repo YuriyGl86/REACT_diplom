@@ -4,7 +4,7 @@ import { HeaderCart } from '../HeaderCart'
 import { SearchExpander } from '../SearchExpander'
 import { SearchForm } from '../SearchForm/SearchForm'
 import { Logo } from '../Logo'
-import { MenuItem } from '../../MenuItem'
+
 
 export  function Header({ menuItems }) {
   return (

@@ -309,6 +309,11 @@ h2, .h2 {
   margin-top: 2em;
 }
 
+body h2, body .h2 {
+  margin-bottom: 1.5em;
+  margin-top: 2em;
+}
+
 .btn-outline-primary {
   color: #727e86;
   border-color: #727e86;

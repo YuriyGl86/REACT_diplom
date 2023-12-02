@@ -1,26 +1,21 @@
 import { Banner } from "../../components/Banner";
+import {CardsList} from "../../components/CardsList";
+import { Catalog } from "../../components/Catalog";
+import { Hits } from "../../components/Hits";
 import { Preloader } from "../../components/Preloader";
-import { Widget } from "../../components/Widget/Widget";
-
+import { Widget } from "../../components/Widget";
 
 
 export  function HomePage() {
-
-
 
   return (
     <div className="row">
       <div className="col">
         <Banner/>
 
-        <Widget title={'Хиты продаж!'} sectionClasses={"top-sales"}>
-          <Preloader/>
-        </Widget>
+        <Hits/>
 
-
-        <Widget title={'Каталог'} sectionClasses={"catalog"}>
-          <Preloader/>
-        </Widget>
+        <Catalog/>
 
       </div>
     </div>

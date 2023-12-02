@@ -1,15 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import counterReducer from '../features/counter/counterSlice';
-// import filmsReducer from './slices/filmsSlice'
-// import favoritesReducer from './slices/favoritesSlice'
-// import { fetchApiSlice } from './slices/fetchAPI';
-import hitsReducer from '../reducers/hitsReducer';
+import { catalogFetchAPI } from './catalogFetchAPI';
+import appStateReducer from './slices/appStateSlice'
 
 
 export const store = configureStore({
   reducer: {
-    hits: hitsReducer,
+    appState: appStateReducer,
+    [catalogFetchAPI.reducerPath]: catalogFetchAPI.reducer,
   },
-  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(fetchApiSlice.middleware)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(catalogFetchAPI.middleware)
 });
 

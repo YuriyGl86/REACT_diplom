@@ -48,7 +48,6 @@ export  function Catalog({ children }) {
     const dispatch = useDispatch()
 
   useEffect(()=>{
-
     return ()=> {dispatch(catalogFetchAPI.util.resetApiState())}
   }, [])
 
@@ -59,7 +58,7 @@ export  function Catalog({ children }) {
         {children}
         <CategoriesList/>
 
-        {error?`Произошла ошибка загрузки категорий каталога - ${error.message}`:null}
+      {error?`Произошла ошибка загрузки категорий каталога - ${error.message}`:null}
       {isLoading?<Preloader/>:null}
       {isSuccess?
         <CardsList items={data} addClasses={'catalog-item-card'}/>: null}

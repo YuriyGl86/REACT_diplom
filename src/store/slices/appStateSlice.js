@@ -9,12 +9,19 @@ const initialState = {
   headerSearchOpen: false,
   headerSearch: '',
   catalogSearch: '',
-  searchRequest:undefined
+  searchRequest:undefined,
+  count: 1,
+  selectedSize: undefined,
+  orderForm: {
+    phone:'',
+    address:'',
+    agreement: false
+  }
 };
 
 
 export const appStateSlice = createSlice({
-    name: 'categories',
+    name: 'appState',
     initialState,
     reducers: {
       selectFilter: (state, action) => {
@@ -54,9 +61,28 @@ export const appStateSlice = createSlice({
         state.catalogSearch = state.headerSearch
         state.searchRequest = state.headerSearch
         state.headerSearch = ''
-        // state.headerSearchOpen = 'false'
       },
-
+      decrementcount(state) {
+        if(state.count > 1) {state.count -= 1}
+      },
+      incrementcount(state) {
+        if(state.count < 10) {state.count += 1}
+      },
+      resetcount(state) {
+        state.count = 1
+      },
+      selectSize(state,action) {
+        state.selectedSize = action.payload
+      },
+      changeOrderPhone(state,action) {
+        state.orderForm.phone = action.payload
+      },
+      changeOrderAddress(state,action) {
+        state.orderForm.address = action.payload
+      },
+      changeOrderAgreement(state,action) {
+        state.orderForm.agreement = action.payload
+      },
 
     },
     extraReducers: (builder) => {

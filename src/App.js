@@ -8,6 +8,7 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactsPage } from './pages/ContactsPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { CartPage } from './pages/CartPage';
+import { CatalogItemPage } from './pages/CatalogItemPage';
 
 
 
@@ -21,8 +22,8 @@ function App() {
         <Route path="/about" element={ <AboutPage/>} />
         <Route path="/contacts" element={ <ContactsPage/>} />
         <Route path="/cart" element={ <CartPage/>} />
+        <Route path="/catalog/:id" element={ <CatalogItemPage/>} />
         <Route path='*' element={ <NotFoundPage/>} />
-        {/* <Route path="/films/:id" element={ <FilmDetailViewPage/>} /> */}
       </Route>
     </Routes>
   );

@@ -1,7 +1,14 @@
 import { createApi, defaultSerializeQueryArgs, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const catalogFetchAPI = createApi({
-    baseQuery: fetchBaseQuery({baseUrl: process.env.REACT_APP_FETCH_API}),
+    baseQuery: fetchBaseQuery({
+        baseUrl: process.env.REACT_APP_FETCH_API,
+        prepareHeaders: (headers) => {
+            headers.set('Content-Type', "application/json")
+            // headers.set("Accept", "*/*")
+            return headers
+          },
+    }),
     reducerPath: "api",
     endpoints: (builder) => ({
         getCategories: builder.query({
@@ -37,9 +44,19 @@ export const catalogFetchAPI = createApi({
                 return currentArg !== previousArg
             },
         }),
+        getCatalogItemDetails: builder.query({
+            query: (id) => `/items/${id}`
+        }),
+        sendOrder: builder.mutation({
+            query: (body) => ({
+                url:'/order',
+                method: 'POST',
+                body
+            })
+        })
     })
 })
 
-export const {useGetCategoriesQuery} = catalogFetchAPI
-export const {useGetHitsQuery} = catalogFetchAPI
-export const {useGetCatalogItemsQuery} = catalogFetchAPI
+export const {useGetCategoriesQuery, useGetHitsQuery, useGetCatalogItemsQuery, useGetCatalogItemDetailsQuery, useSendOrderMutation} = catalogFetchAPI
+// export const {useGetHitsQuery} = catalogFetchAPI
+// export const {useGetCatalogItemsQuery} = catalogFetchAPI

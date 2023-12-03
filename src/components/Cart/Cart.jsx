@@ -1,37 +1,14 @@
 import React from 'react'
 import { OrderList } from '../OrderList'
+import { useSelector } from 'react-redux'
 
 export  function Cart() {
 
+    const {items} = useSelector(store=> store.cart)
 
-    const orders =[
-        {
-          id: 66,
-          title: "Босоножки 'Myer'",
-          price: 34000,
-          size: '10 US',
-          amount: 1
-        },
-        {
-          id: 65,
-          category: 15,
-          title: "Босоножки 'Keira'",
-          price: 7600,
-          size: '12 US',
-          amount: 2
-        },
-        {
-          id: 73,
-          category: 15,
-          title: "Супергеройские кеды",
-          price: 1400,
-          size: '8 US',
-          amount: 3
-        },
-      
-    ]
-
-
+    const getTotal = () => {
+        return items.reduce((acc, i) => acc + i.count * i.price, 0)
+    }
 
 
     return (
@@ -49,10 +26,10 @@ export  function Cart() {
                 </tr>
             </thead>
             <tbody>
-                <OrderList orders={orders}/>
+                <OrderList/>
                 <tr>
                     <td colSpan="5" className="text-right">Общая стоимость</td>
-                    <td>34 000 руб.</td>
+                    <td>{getTotal()} руб.</td>
                 </tr>
             </tbody>
         </table>

@@ -1,6 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export  function Card({card, classNames=''}) {
+
+
+
+
   return (
     <div className="col-4">
       <div className={`card ${classNames}`}>
@@ -9,7 +14,7 @@ export  function Card({card, classNames=''}) {
         <div className="card-body">
         <p className="card-text">{card.title}</p>
         <p className="card-text">{card.price} руб.</p>
-        <a href="/products/1.html" className="btn btn-outline-primary">Заказать</a>
+        <Link to={`/catalog/${card.id}`} className="btn btn-outline-primary">Заказать</Link>
         </div>
       </div>
     </div>

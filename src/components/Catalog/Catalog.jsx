@@ -49,6 +49,7 @@ export  function Catalog({ children }) {
 
   useEffect(()=>{
     return ()=> {dispatch(catalogFetchAPI.util.resetApiState())}
+    // eslint-disable-next-line
   }, [])
 
       

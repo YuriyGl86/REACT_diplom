@@ -6,6 +6,9 @@ import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistor } from './store/store';
+import { Preloader } from './components/Preloader';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -13,7 +16,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
     <Provider store={store}>
-      <App />
+      <PersistGate loading={<Preloader/>} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </Router>
 

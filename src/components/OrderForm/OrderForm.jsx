@@ -9,7 +9,7 @@ export  function OrderForm() {
     const dispatch = useDispatch()
     const { orderForm: {phone, address, agreement}} = useSelector(store=>store.appState)
     const { items} = useSelector(store=>store.cart)
-    const [sendOrder, {isLoading, isError, isSuccess, error, reset }] = useSendOrderMutation()
+    const [sendOrder, {isLoading, isError, isSuccess, error }] = useSendOrderMutation()
 
 
     const handleSubmit = async(e)=> {
@@ -37,7 +37,7 @@ export  function OrderForm() {
             dispatch(appStateActions.resetOrderForm())
             // reset()
         }
-        
+        // eslint-disable-next-line
     }, [isSuccess])
 
 

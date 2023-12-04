@@ -21,9 +21,12 @@ export  function CatalogItemPage() {
 
     useEffect(()=>{
         return ()=>{
+
             dispatch(appStateActions.selectSize(undefined))
+
             dispatch(appStateActions.resetcount())
         }
+        // eslint-disable-next-line
     }, [])
 
 

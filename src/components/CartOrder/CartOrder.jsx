@@ -12,7 +12,7 @@ export  function CartOrder({order, index}) {
 
     return (
     <tr>
-        <td scope="row">{index}</td>
+        <td >{index}</td>
         <td><Link to={`/catalog/${order.id}`}>{order.title}</Link></td>
         <td>{order.size}</td>
         <td>{order.count}</td>

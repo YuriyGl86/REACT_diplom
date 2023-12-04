@@ -14,8 +14,9 @@ export  function CategoryItem({category}) {
   return (
     <li className="nav-item"  >
         <a 
-        className={`nav-link ${category.id === selected? 'active': ''}`} 
-        href="#" 
+        className={`nav-link ${category.id === selected? 'active': ''}`}
+        // eslint-disable-next-line
+        href="/" 
         onClick={handleCategoryClick}
         >
           {category.title}

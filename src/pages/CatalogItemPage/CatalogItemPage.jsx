@@ -38,7 +38,6 @@ export  function CatalogItemPage() {
             size: selectedSize,
             count: count
         }
-        console.log(newPurchase)
         dispatch(cartActions.addToCart(newPurchase))
         navigate('/cart')
     }

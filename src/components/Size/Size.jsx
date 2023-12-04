@@ -6,7 +6,6 @@ export  function Size({size}) {
     const { selectedSize } = useSelector(store=> store.appState)
 
     const handleSizeSelect = (e)=> {
-        console.log(size.size)
         dispatch(appStateActions.selectSize(size.size))
     }
 

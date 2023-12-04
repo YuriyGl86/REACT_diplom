@@ -32,7 +32,6 @@ export  function OrderForm() {
     
     useEffect(()=>{
         if(isSuccess){
-            console.log('cfrctc')
             dispatch(cartActions.resetCart())
             dispatch(appStateActions.resetOrderForm())
             // reset()
@@ -56,8 +55,6 @@ export  function OrderForm() {
     const disabled = ()=> {
         return !agreement || isLoading || items.length === 0 || !phone ||  !address
     }
-
-    console.log(agreement)
 
     return (
         <div className="card" style={{maxWidth: 30+'rem', margin: '0 auto' }}>

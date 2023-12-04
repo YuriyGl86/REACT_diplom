@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { appStateActions } from '../../store/slices/appStateSlice'
 import { useSendOrderMutation } from '../../store/catalogFetchAPI'
+import { Preloader } from '../Preloader'
+import { cartActions } from '../../store/slices/cartSlice'
 
 export  function OrderForm() {
     const dispatch = useDispatch()
     const { orderForm: {phone, address, agreement}} = useSelector(store=>store.appState)
     const { items} = useSelector(store=>store.cart)
-    const [sendOrder, data] = useSendOrderMutation()
+    const [sendOrder, {isLoading, isError, isSuccess, error, reset }] = useSendOrderMutation()
 
 
     const handleSubmit = async(e)=> {
@@ -19,8 +21,25 @@ export  function OrderForm() {
             },
             "items": items
           }
-        sendOrder(JSON.stringify(order)).unwrap()
+          try {
+              await sendOrder(JSON.stringify(order)).unwrap()
+
+          } catch(e) {
+            console.log(e)
+          }
+
     }
+    
+    useEffect(()=>{
+        if(isSuccess){
+            console.log('cfrctc')
+            dispatch(cartActions.resetCart())
+            dispatch(appStateActions.resetOrderForm())
+            // reset()
+        }
+        
+    }, [isSuccess])
+
 
     const handleChangePhone =({target:{value}})=>{
         dispatch(appStateActions.changeOrderPhone(value))
@@ -31,8 +50,14 @@ export  function OrderForm() {
     }
 
     const handleChangeAgreemnt =(e)=>{
-        dispatch(appStateActions.changeOrderAgreement(e.target.checked))
+        dispatch(appStateActions.changeOrderAgreement())
     }
+
+    const disabled = ()=> {
+        return !agreement || isLoading || items.length === 0 || !phone ||  !address
+    }
+
+    console.log(agreement)
 
     return (
         <div className="card" style={{maxWidth: 30+'rem', margin: '0 auto' }}>
@@ -46,10 +71,17 @@ export  function OrderForm() {
                     <input className="form-control" id="address" placeholder="Адрес доставки" onChange={handleChangeAddress} value={address} name='address'/>
                 </div>
                 <div className="form-group form-check">
-                    <input type="checkbox" className="form-check-input" id="agreement" name='agreement' onChange={handleChangeAgreemnt}/>
+                    <input type="checkbox" className="form-check-input" id="agreement" name='agreement' 
+                    onChange={handleChangeAgreemnt} 
+                    checked={agreement} 
+                    />
                     <label className="form-check-label" htmlFor="agreement">Согласен с правилами доставки</label>
                 </div>
-                <button type="submit" className="btn btn-outline-secondary" disabled={!agreement}>Оформить</button>
+                <button type="submit" className="btn btn-outline-secondary" disabled={disabled()}>{isLoading?'Отправка':'Оформить'}</button>
+                {isLoading?<Preloader/>:null}
+                {isError?`Произошла ошибка отправки формы -  ${error.error}`:null}
+                {isSuccess?'Заказ успешно отправлен!':null}
+
             </form>
         </div>
     )

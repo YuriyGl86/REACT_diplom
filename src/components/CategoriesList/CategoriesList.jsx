@@ -2,28 +2,6 @@ import { useGetCategoriesQuery } from '../../store/catalogFetchAPI'
 import { CategoryItem } from '../CategoryItem/CategoryItem'
 import { Preloader } from '../Preloader'
 
-
-// const data = [
-//   {
-//       "id": 12,
-//       "title": "Мужская обувь"
-//   },
-//   {
-//       "id": 13,
-//       "title": "Женская обувь"
-//   },
-//   {
-//       "id": 14,
-//       "title": "Обувь унисекс"
-//   },
-//   {
-//       "id": 15,
-//       "title": "Детская обувь"
-//   }
-// ]
-
-
-
 export  function CategoriesList() {
 
   const { data, error, isLoading, isSuccess } = useGetCategoriesQuery()

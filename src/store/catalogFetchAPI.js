@@ -5,7 +5,6 @@ export const catalogFetchAPI = createApi({
         baseUrl: process.env.REACT_APP_FETCH_API,
         prepareHeaders: (headers) => {
             headers.set('Content-Type', "application/json")
-            // headers.set("Accept", "*/*")
             return headers
           },
     }),
@@ -58,5 +57,3 @@ export const catalogFetchAPI = createApi({
 })
 
 export const {useGetCategoriesQuery, useGetHitsQuery, useGetCatalogItemsQuery, useGetCatalogItemDetailsQuery, useSendOrderMutation} = catalogFetchAPI
-// export const {useGetHitsQuery} = catalogFetchAPI
-// export const {useGetCatalogItemsQuery} = catalogFetchAPI

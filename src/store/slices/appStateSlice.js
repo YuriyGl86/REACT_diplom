@@ -81,7 +81,14 @@ export const appStateSlice = createSlice({
         state.orderForm.address = action.payload
       },
       changeOrderAgreement(state,action) {
-        state.orderForm.agreement = action.payload
+        state.orderForm.agreement = !state.orderForm.agreement
+      },
+      resetOrderForm(state) {
+        state.orderForm = {
+          phone:'',
+          address:'',
+          agreement: false
+        }
       },
 
     },

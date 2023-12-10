@@ -16,7 +16,7 @@ export function CategoriesList() {
                     className="catalog-categories nav justify-content-center"
                     role="menu"
                 >
-                    {[{ id: 'Все', title: 'Все' }, ...data].map(category => (
+                    {[{ id: null, title: 'Все' }, ...data].map(category => (
                         <CategoryItem
                             category={category}
                             key={category.title}

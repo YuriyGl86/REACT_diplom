@@ -25,7 +25,7 @@ export const catalogFetchAPI = createApi({
                 return {
                     url: '/items',
                     params: {
-                        ...(selected !== 'Все' && { categoryId: selected }),
+                        ...(selected && { categoryId: selected }),
                         ...(q && { q }),
                         ...(offset && { offset }),
                     },

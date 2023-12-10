@@ -6,9 +6,7 @@ export function SearchForm() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { headerSearchOpen, headerSearch } = useSelector(
-        store => store.appState,
-    );
+    const { headerSearchOpen, headerSearch } = useSelector(store => store.appState);
 
     const handleChange = ({ target: { value } }) => {
         dispatch(appStateActions.changeHeaderSearch(value));

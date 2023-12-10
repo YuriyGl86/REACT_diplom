@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { appStateActions } from '../../store/slices/appStateSlice';
 import { useSendOrderMutation } from '../../store/catalogFetchAPI';
@@ -7,12 +7,26 @@ import { cartActions } from '../../store/slices/cartSlice';
 
 export function OrderForm() {
     const dispatch = useDispatch();
-    const {
-        orderForm: { phone, address, agreement },
-    } = useSelector(store => store.appState);
+
+    const initForm = {
+        phone: '',
+        address: '',
+        agreement: false,
+    };
+
+    const [form, setForm] = useState(initForm);
+    const { phone, address, agreement } = form;
+
+    const handleChange = ({ target }) => {
+        let { name, value } = target;
+        if (name === 'agreement') {
+            value = target.checked;
+        }
+        setForm(prev => ({ ...prev, [name]: value }));
+    };
+
     const { items } = useSelector(store => store.cart);
-    const [sendOrder, { isLoading, isError, isSuccess, error }] =
-        useSendOrderMutation();
+    const [sendOrder, { isLoading, isError, isSuccess, error }] = useSendOrderMutation();
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -33,35 +47,18 @@ export function OrderForm() {
     useEffect(() => {
         if (isSuccess) {
             dispatch(cartActions.resetCart());
-            dispatch(appStateActions.resetOrderForm());
+            setForm(initForm);
             // reset()
         }
         // eslint-disable-next-line
     }, [isSuccess]);
 
-    const handleChangePhone = ({ target: { value } }) => {
-        dispatch(appStateActions.changeOrderPhone(value));
-    };
-
-    const handleChangeAddress = ({ target: { value } }) => {
-        dispatch(appStateActions.changeOrderAddress(value));
-    };
-
-    const handleChangeAgreemnt = e => {
-        dispatch(appStateActions.changeOrderAgreement());
-    };
-
     const disabled = () => {
-        return (
-            !agreement || isLoading || items.length === 0 || !phone || !address
-        );
+        return !agreement || isLoading || items.length === 0 || !phone || !address;
     };
 
     return (
-        <div
-            className="card"
-            style={{ maxWidth: 30 + 'rem', margin: '0 auto' }}
-        >
+        <div className="card" style={{ maxWidth: 30 + 'rem', margin: '0 auto' }}>
             <form className="card-body" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="phone">Телефон</label>
@@ -69,7 +66,7 @@ export function OrderForm() {
                         className="form-control"
                         id="phone"
                         placeholder="Ваш телефон"
-                        onChange={handleChangePhone}
+                        onChange={handleChange}
                         value={phone}
                         name="phone"
                     />
@@ -80,7 +77,7 @@ export function OrderForm() {
                         className="form-control"
                         id="address"
                         placeholder="Адрес доставки"
-                        onChange={handleChangeAddress}
+                        onChange={handleChange}
                         value={address}
                         name="address"
                     />
@@ -91,7 +88,7 @@ export function OrderForm() {
                         className="form-check-input"
                         id="agreement"
                         name="agreement"
-                        onChange={handleChangeAgreemnt}
+                        onChange={handleChange}
                         checked={agreement}
                     />
                     <label className="form-check-label" htmlFor="agreement">
@@ -106,9 +103,7 @@ export function OrderForm() {
                     {isLoading ? 'Отправка' : 'Оформить'}
                 </button>
                 {isLoading ? <Preloader /> : null}
-                {isError
-                    ? `Произошла ошибка отправки формы -  ${error.error}`
-                    : null}
+                {isError ? `Произошла ошибка отправки формы -  ${error.error}` : null}
                 {isSuccess ? 'Заказ успешно отправлен!' : null}
             </form>
         </div>

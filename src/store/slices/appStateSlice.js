@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { catalogFetchAPI } from '../catalogFetchAPI';
 
 const initialState = {
-    selected: 'Все',
+    selected: null,
     offset: null,
     haveMoreItems: true,
     loadingMore: false,
@@ -10,13 +10,6 @@ const initialState = {
     headerSearch: '',
     catalogSearch: '',
     searchRequest: undefined,
-    count: 1,
-    selectedSize: undefined,
-    orderForm: {
-        phone: '',
-        address: '',
-        agreement: false,
-    },
 };
 
 export const appStateSlice = createSlice({
@@ -27,7 +20,7 @@ export const appStateSlice = createSlice({
             state.selected = action.payload;
         },
         resetFilter: state => {
-            state.selected = 'Все';
+            state.selected = null;
         },
         incrementOffset(state) {
             state.offset += 6;
@@ -60,38 +53,6 @@ export const appStateSlice = createSlice({
             state.catalogSearch = state.headerSearch;
             state.searchRequest = state.headerSearch;
             state.headerSearch = '';
-        },
-        decrementcount(state) {
-            if (state.count > 1) {
-                state.count -= 1;
-            }
-        },
-        incrementcount(state) {
-            if (state.count < 10) {
-                state.count += 1;
-            }
-        },
-        resetcount(state) {
-            state.count = 1;
-        },
-        selectSize(state, action) {
-            state.selectedSize = action.payload;
-        },
-        changeOrderPhone(state, action) {
-            state.orderForm.phone = action.payload;
-        },
-        changeOrderAddress(state, action) {
-            state.orderForm.address = action.payload;
-        },
-        changeOrderAgreement(state, action) {
-            state.orderForm.agreement = !state.orderForm.agreement;
-        },
-        resetOrderForm(state) {
-            state.orderForm = {
-                phone: '',
-                address: '',
-                agreement: false,
-            };
         },
     },
     extraReducers: builder => {

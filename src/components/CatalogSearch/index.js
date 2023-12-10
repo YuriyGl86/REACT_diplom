@@ -1,1 +1,1 @@
-export * from './CatalogSearch'
+export * from './CatalogSearch';

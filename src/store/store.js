@@ -3,31 +3,32 @@ import { catalogFetchAPI } from './catalogFetchAPI';
 import appStateReducer from './slices/appStateSlice';
 import cartReducer from './slices/cartSlice';
 
-import { persistStore, persistReducer,  
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER, } from 'redux-persist';
+import {
+    persistStore,
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
-  key: 'cart',
-  storage,
-  whitelist: ['cart'],
-  blacklist: [catalogFetchAPI.reducerPath]
-}
+    key: 'cart',
+    storage,
+    whitelist: ['cart'],
+    blacklist: [catalogFetchAPI.reducerPath],
+};
 
-const rootReducer = combineReducers(
-  {
-  appState: appStateReducer,
-  cart: cartReducer,
-  [catalogFetchAPI.reducerPath]: catalogFetchAPI.reducer,
-  }
-)
+const rootReducer = combineReducers({
+    appState: appStateReducer,
+    cart: cartReducer,
+    [catalogFetchAPI.reducerPath]: catalogFetchAPI.reducer,
+});
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // export const store = configureStore({
 //   reducer: {
@@ -40,12 +41,20 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 // });
 
 export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    },
-  }).concat(catalogFetchAPI.middleware),
+    reducer: persistedReducer,
+    middleware: getDefaultMiddleware =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [
+                    FLUSH,
+                    REHYDRATE,
+                    PAUSE,
+                    PERSIST,
+                    PURGE,
+                    REGISTER,
+                ],
+            },
+        }).concat(catalogFetchAPI.middleware),
 });
 
-export const persistor = persistStore(store)
+export const persistor = persistStore(store);

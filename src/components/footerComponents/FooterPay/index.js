@@ -1,1 +1,1 @@
-export * from './FooterPay'
+export * from './FooterPay';

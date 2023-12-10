@@ -1,20 +1,17 @@
-import { Banner } from '../../components/Banner'
-import { Catalog } from '../../components/Catalog'
-import { CatalogSearch } from '../../components/CatalogSearch'
+import { Banner } from '../../components/Banner';
+import { Catalog } from '../../components/Catalog';
+import { CatalogSearch } from '../../components/CatalogSearch';
 
-export  function CatalogPage() {
+export function CatalogPage() {
+    return (
+        <div className="row">
+            <div className="col">
+                <Banner />
 
-
-  return (
-    <div className="row">
-      <div className="col">
-        <Banner/>
-
-        <Catalog>
-          <CatalogSearch/>
-        </Catalog>
-
-      </div>
-    </div>
-  )
+                <Catalog>
+                    <CatalogSearch />
+                </Catalog>
+            </div>
+        </div>
+    );
 }

@@ -1,1 +1,1 @@
-export * from './CatalogItemDetails'
+export * from './CatalogItemDetails';

@@ -1,59 +1,75 @@
-import { createApi, defaultSerializeQueryArgs, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {
+    createApi,
+    defaultSerializeQueryArgs,
+    fetchBaseQuery,
+} from '@reduxjs/toolkit/query/react';
 
 export const catalogFetchAPI = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: process.env.REACT_APP_FETCH_API,
-        prepareHeaders: (headers) => {
-            headers.set('Content-Type', "application/json")
-            return headers
-          },
+        prepareHeaders: headers => {
+            headers.set('Content-Type', 'application/json');
+            return headers;
+        },
     }),
-    reducerPath: "api",
-    endpoints: (builder) => ({
+    reducerPath: 'api',
+    endpoints: builder => ({
         getCategories: builder.query({
-            query: () => `/categories`
+            query: () => `/categories`,
         }),
         getHits: builder.query({
-            query: () => `/top-sales`
+            query: () => `/top-sales`,
         }),
         getCatalogItems: builder.query({
-            query: ({selected, q, offset}) =>  {
+            query: ({ selected, q, offset }) => {
                 return {
-                    url:'/items',
+                    url: '/items',
                     params: {
-                        ...(selected !=="Все" && {categoryId:selected}),
-                        ...(q && {q}),
-                        ...(offset && {offset})
-                    }
-                }
-            },        
+                        ...(selected !== 'Все' && { categoryId: selected }),
+                        ...(q && { q }),
+                        ...(offset && { offset }),
+                    },
+                };
+            },
             keepUnusedDataFor: 0,
-            serializeQueryArgs: ({ queryArgs, endpointDefinition, endpointName })=>{ // Для себя: исключаем из ключа кэширования offset 
-                const {selected, q} = queryArgs
+            serializeQueryArgs: ({
+                queryArgs,
+                endpointDefinition,
+                endpointName,
+            }) => {
+                // Для себя: исключаем из ключа кэширования offset
+                const { selected, q } = queryArgs;
                 return defaultSerializeQueryArgs({
                     endpointName,
                     queryArgs: { selected, q },
-                    endpointDefinition
-                })
+                    endpointDefinition,
+                });
             },
-            merge: (currentCache, newItems) => {  // Для себя: данные нового запроса пушим к данным прошлых
-                currentCache.push(...newItems)
+            merge: (currentCache, newItems) => {
+                // Для себя: данные нового запроса пушим к данным прошлых
+                currentCache.push(...newItems);
             },
             forceRefetch({ currentArg, previousArg }) {
-                return currentArg !== previousArg
+                return currentArg !== previousArg;
             },
         }),
         getCatalogItemDetails: builder.query({
-            query: (id) => `/items/${id}`
+            query: id => `/items/${id}`,
         }),
         sendOrder: builder.mutation({
-            query: (body) => ({
-                url:'/order',
+            query: body => ({
+                url: '/order',
                 method: 'POST',
-                body
-            })
-        })
-    })
-})
+                body,
+            }),
+        }),
+    }),
+});
 
-export const {useGetCategoriesQuery, useGetHitsQuery, useGetCatalogItemsQuery, useGetCatalogItemDetailsQuery, useSendOrderMutation} = catalogFetchAPI
+export const {
+    useGetCategoriesQuery,
+    useGetHitsQuery,
+    useGetCatalogItemsQuery,
+    useGetCatalogItemDetailsQuery,
+    useSendOrderMutation,
+} = catalogFetchAPI;

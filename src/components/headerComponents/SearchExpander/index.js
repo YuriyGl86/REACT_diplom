@@ -1,1 +1,1 @@
-export * from './SearchExpander'
+export * from './SearchExpander';

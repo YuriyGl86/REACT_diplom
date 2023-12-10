@@ -1,14 +1,14 @@
-import React from 'react'
-import { Size } from '../Size/Size'
+import React from 'react';
+import { Size } from '../Size/Size';
 
-export  function Sizes({sizes}) {
-
+export function Sizes({ sizes }) {
     return (
-    <>
-        {sizes.filter(i=>i.available).map(item=> {    
-            return  <Size key={item.size} size={item}/>
-        })}
-    
-    </>
-    )
+        <>
+            {sizes
+                .filter(i => i.available)
+                .map(item => {
+                    return <Size key={item.size} size={item} />;
+                })}
+        </>
+    );
 }

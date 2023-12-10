@@ -1,1 +1,1 @@
-export * from './AboutContent'
+export * from './AboutContent';

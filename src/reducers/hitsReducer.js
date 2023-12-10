@@ -1,6 +1,4 @@
-
-
-const initialState = {items: [], loadingItems: false, error: null};
+const initialState = { items: [], loadingItems: false, error: null };
 
 export default function hitsReducer(state = initialState, action) {
     // switch (action.type) {
@@ -13,6 +11,5 @@ export default function hitsReducer(state = initialState, action) {
     //         const {items} = action.payload;
     //         return {...state, items, loadingItems: false, error: null,};
     //     default:
-            return state;
-    
+    return state;
 }

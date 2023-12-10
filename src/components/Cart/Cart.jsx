@@ -1,18 +1,15 @@
-import React from 'react'
-import { OrderList } from '../OrderList'
-import { useSelector } from 'react-redux'
+import React from 'react';
+import { OrderList } from '../OrderList';
+import { useSelector } from 'react-redux';
 
-export  function Cart() {
-
-    const {items} = useSelector(store=> store.cart)
+export function Cart() {
+    const { items } = useSelector(store => store.cart);
 
     const getTotal = () => {
-        return items.reduce((acc, i) => acc + i.count * i.price, 0)
-    }
-
+        return items.reduce((acc, i) => acc + i.count * i.price, 0);
+    };
 
     return (
-
         <table className="table table-bordered">
             <thead>
                 <tr>
@@ -26,13 +23,14 @@ export  function Cart() {
                 </tr>
             </thead>
             <tbody>
-                <OrderList/>
+                <OrderList />
                 <tr>
-                    <td colSpan="5" className="text-right">Общая стоимость</td>
+                    <td colSpan="5" className="text-right">
+                        Общая стоимость
+                    </td>
                     <td>{getTotal()} руб.</td>
                 </tr>
             </tbody>
         </table>
-
-    )
+    );
 }

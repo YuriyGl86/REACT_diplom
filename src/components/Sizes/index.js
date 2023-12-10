@@ -1,1 +1,1 @@
-export * from './Sizes'
+export * from './Sizes';
